@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Biconnected Components Visualizer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Biconnected Components Visualizer</h1>
+        <p>Click to add nodes. Click two nodes to add an edge. Use controls to generate graphs and run analysis.</p>
+      </header>
+
+      <section class="controls">
+  <button id="clearBtn">Clear</button>
+  <button id="randomBtn" class="btn primary">Random Graph</button>
+        <label for="numNodes">Nodes:</label>
+        <input id="numNodes" type="number" min="3" max="60" value="8" />
+  <button id="runBtn" class="btn primary">Run Analysis</button>
+  <button id="layoutBtn">Auto Layout</button>
+      <button id="deleteBtn" class="btn">Delete Selected</button>
+      <button id="renameBtn" class="btn">Rename Selected</button>
+  <button id="exportBtn" class="btn">Export JSON</button>
+        <input id="importFile" type="file" accept="application/json" style="display:none" />
+  <button id="importBtn" class="btn">Import JSON</button>
+        <label style="margin-left:8px"><input type="checkbox" id="stepMode"/> Step mode</label>
+  <div class="step-controls">
+    <button id="playBtn" disabled class="btn primary">Play</button>
+    <button id="prevBtn" disabled class="btn">&lt; Prev</button>
+    <button id="nextBtn" disabled class="btn">Next &gt;</button>
+  </div>
+        <label for="speed">Speed</label>
+        <input id="speed" type="range" min="100" max="2000" step="100" value="600" />
+        <span id="status"></span>
+      </section>
+
+      <section class="main">
+        <svg id="svg" width="900" height="600"></svg>
+        <aside class="legend">
+          <h3>Legend</h3>
+          <ul>
+            <li><span class="swatch art"></span>Articulation (anticurculation) point</li>
+            <li><span class="swatch bridge"></span>Bridge</li>
+            <li><span class="swatch comp"></span>Component color (edges)</li>
+          </ul>
+          <div id="componentsList"></div>
+          <h4 style="margin-top:12px">Steps</h4>
+          <div id="stepsPanel" style="max-height:300px;overflow:auto;padding-top:6px"></div>
+        </aside>
+      </section>
+
+      <footer>
+        <small>Implements DFS-based Tarjan algorithm for articulation points, bridges and biconnected components.</small>
+      </footer>
+    </div>
+
+    <script src="graph.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

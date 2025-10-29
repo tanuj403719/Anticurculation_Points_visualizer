@@ -1,0 +1,65 @@
+:root{--bg:#f8f5ec;--panel:#fff;--muted:#6b6b6b;--accent:#7c5e3c;--accent-contrast:#fff;--btn-radius:8px}
+*{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+body{margin:0;background:var(--bg);color:#222}
+.container{max-width:1100px;margin:18px auto;padding:14px}
+header h1{margin:0 0 6px 0;font-size:20px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.controls input{width:64px}
+#status{margin-left:10px;color:var(--muted)}
+.main{display:flex;gap:12px}
+svg{background:var(--panel);border-radius:6px;border:1px solid rgba(0,0,0,0.06)}
+.legend{width:260px;padding:10px;background:var(--panel);border-radius:6px;border:1px solid rgba(0,0,0,0.04)}
+.legend h3{margin-top:0}
+.swatch{display:inline-block;width:18px;height:12px;margin-right:8px;border-radius:3px}
+.swatch.art{background:#f28b8b;border:2px solid #d9534f}
+.swatch.bridge{background:#bfeccf;border:2px solid #28a745}
+.swatch.comp{background:linear-gradient(90deg,#a9d6e5,#d5b8ff)}
+#componentsList{margin-top:8px;max-height:240px;overflow:auto}
+circle.node{fill:#ffffff;stroke:#7c5e3c;stroke-width:2;cursor:pointer}
+/* articulation / 'anticurculation' point styling: prominent warm color */
+/* articulation / 'anticurculation' point styling: prominent red color */
+circle.node.art{fill:#ffe5e5;stroke:#d9534f;stroke-width:3}
+/* use transform-based scaling for states to avoid wobble */
+circle.node{transform-box:fill-box;transform-origin:center center;transition:transform 120ms ease, stroke-width 120ms ease}
+/* DFS iteration highlight: use dark black tones for traversal (current/step) */
+circle.node.current{fill:#2b2b2b;stroke:#111;transform:scale(1.18);stroke-width:3}
+circle.node.step{fill:#444;stroke:#111;transform:scale(1.06)}
+circle.node.selected{transform:scale(1.25)}
+/* Ensure articulation (anticurculation) styling wins over other transient states
+	 (current/step/selected) so AP nodes stay visually red even during steps. */
+circle.node.art, circle.node.art.current, circle.node.art.step, circle.node.art.selected {
+	fill: #ffe5e5;
+	stroke: #d9534f;
+	stroke-width: 3;
+}
+text.nlabel{font-size:11px;fill:#222;pointer-events:none;font-weight:600}
+/* default edges: non-bridges should appear dark black per user request */
+line.edge{stroke:#222;stroke-width:2;opacity:0.95}
+/* bridges: use green color */
+line.edge.bridge{stroke:#28a745;stroke-width:3}
+/* edges that are currently in the DFS stack are highlighted in dark black */
+line.edge.instack{stroke:#222;stroke-width:3;opacity:1}
+.comp-bullet{display:inline-block;width:12px;height:12px;margin-right:6px;border-radius:2px}
+.footer{color:var(--muted)}
+.btn{background:var(--accent);color:white;padding:6px 10px;border-radius:6px;border:none}
+.small{font-size:12px;color:var(--muted)}
+
+/* improved button styles: only style buttons that are NOT .btn so .btn keeps its own look */
+button:not(.btn){cursor:pointer;border-radius:var(--btn-radius);padding:8px 10px;border:1px solid rgba(0,0,0,0.06);background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.85));box-shadow:0 1px 2px rgba(16,24,40,0.04);color:#333;transition:all 120ms ease}
+button:not(.btn):hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(16,24,40,0.08)}
+button:not(.btn):active{transform:translateY(0)}
+.btn{background:var(--accent);color:var(--accent-contrast);padding:8px 10px;border-radius:var(--btn-radius);border:none;cursor:pointer}
+.btn.primary{background:linear-gradient(180deg,var(--accent),#6b4f33);color:var(--accent-contrast);box-shadow:0 6px 18px rgba(124,94,60,0.12)}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+.controls input[type="range"]{vertical-align:middle}
+
+.step-controls{display:flex;gap:8px;align-items:center;margin-left:auto}
+
+/* Steps panel styles */
+#stepsPanel{font-size:13px;color:#222}
+.step-entry{padding:8px;border-radius:6px;margin-bottom:6px;background:rgba(0,0,0,0.02);cursor:pointer;border:1px solid rgba(0,0,0,0.03)}
+.step-entry:hover{background:rgba(0,0,0,0.04)}
+.step-entry.current{background:linear-gradient(90deg,#f0e9e0,#efe8dd);border-color:rgba(124,94,60,0.12);box-shadow:0 1px 4px rgba(16,24,40,0.04)}
+.step-entry.small{font-size:12px;color:var(--muted)}
+
+
